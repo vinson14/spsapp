@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Sign up for an account
+{% endblock %}
+
+{% block content %}
+{% for message in get_flashed_messages() %}
+{% endfor %}
+
+<!-- Material form register -->
+<div class="card">
+
+    <h5 class="card-header info-color white-text text-center py-4">
+        <strong>Sign up</strong>
+    </h5>
+
+    <!--Card content-->
+    <div class="card-body px-lg-5 pt-0">
+
+        <!-- Form -->
+        <form class="text-center" style="color: #757575;" action="/signup" method="POST">
+            {{ form.csrf_token }}
+            <div class="form-row">
+                <div class="col">
+                    <!-- First name -->
+                    <div class="md-form">
+                        {{ form.name(class="form-control") }}
+                        {{ form.name.label }}
+                    </div>
+                </div>
+                <div class="col">
+                    <!-- Last name -->
+                    <div class="md-form">
+                        {{ form.username(class="form-control") }}
+                        {{ form.username.label }}
+                        {% for error in form.username.errors %}
+                        <small class="form-text text-muted mb-4">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- E-mail -->
+            <div class="md-form mt-0">
+                {{ form.email(class="form-control") }}
+                {{ form.email.label }}
+            </div>
+
+            <!-- Password -->
+            <div class="md-form">
+                {{ form.password(class="form-control") }}
+                {{ form.password.label }}
+                <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                    At least 8 characters
+                </small>
+            </div>
+
+            <!-- Phone number -->
+            <div class="md-form">
+                {{ form.confirm_pass(class="form-control") }}
+                {{ form.confirm_pass.label }}
+                <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                    Passwords must match
+                </small>
+            </div>
+
+            <!-- Sign up button -->
+            {{ form.submit(class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0") }}
+
+            <!-- Social register -->
+            <p>or sign up with:</p>
+
+            <a type="button" class="btn-floating btn-fb btn-sm">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a type="button" class="btn-floating btn-tw btn-sm">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a type="button" class="btn-floating btn-li btn-sm">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a type="button" class="btn-floating btn-git btn-sm">
+                <i class="fab fa-github"></i>
+            </a>
+
+            <hr>
+
+            <!-- Terms of service -->
+            <p>By clicking
+                <em>Sign up</em> you agree to our
+                <a href="" target="_blank">terms of service</a>
+
+        </form>
+        <!-- Form -->
+
+    </div>
+
+</div>
+<!-- Material form register -->
+{% endblock %}
