@@ -4,7 +4,7 @@ from flask_login import login_required, logout_user, current_user, login_user
 from datetime import datetime as dt
 from .forms import SignupForm
 from .models import db, User
-from . import login_manager, socketio
+from . import login_manager, socketio, emit
 
 auth_bp = Blueprint('auth_bp', __name__, template_folder='templates', static_folder='static')
 
@@ -24,6 +24,24 @@ def signup():
             login_user(user) # Set user as logged in
             return redirect(url_for('main_bp.dashboard'))
     return render_template("signup.html", form=form)
+
+@socketio.on('check username')
+def check_username(data):
+    """Check in realtime if the username is taken"""
+    username = data['username']
+    check_username = User.query.filter_by(username=username).first()
+    valid_username = check_username == None
+    emit("valid username", valid_username, broadcast=True)
+
+@socketio.on('check email')
+def check_email(data):
+    """Check in realtime if the email is taken"""
+    email = data['email']
+    check_email = User.query.filter_by(email=email).first()
+    valid_email = check_email == None
+    emit("valid email", valid_email, broadcast=True)
+
+
 
 
 @login_manager.user_loader

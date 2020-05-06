@@ -32,19 +32,18 @@ Sign up for an account
                 <div class="col">
                     <!-- Last name -->
                     <div class="md-form">
-                        {{ form.username(class="form-control") }}
+                        {{ form.username(class="form-control", id="username") }}
                         {{ form.username.label }}
-                        {% for error in form.username.errors %}
-                        <small class="form-text text-muted mb-4">{{ error }}</small>
-                        {% endfor %}
+                        <small class="form-text deep-orange-text mb-4" id="usernameTaken">Username taken</small>
                     </div>
                 </div>
             </div>
 
             <!-- E-mail -->
             <div class="md-form mt-0">
-                {{ form.email(class="form-control") }}
+                {{ form.email(class="form-control", id="email") }}
                 {{ form.email.label }}
+                <small class="form-text deep-orange-text mb-4" id="emailTaken">Email taken</small>
             </div>
 
             <!-- Password -->
@@ -98,4 +97,44 @@ Sign up for an account
 
 </div>
 <!-- Material form register -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // change error message to display:none
+        document.querySelector('#usernameTaken').style.visibility = "hidden";
+        document.querySelector('#emailTaken').style.visibility = "hidden";
+
+        // Connect to websocket
+        var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port)
+        ;
+        socket.on('connect', () => {
+            document.querySelector('#username').onblur = () => {
+                const username = document.querySelector('#username').value;
+                socket.emit('check username', {'username': username});
+            };
+        });
+        socket.on('connect', () => {
+            document.querySelector('#email').onblur = () => {
+                const email = document.querySelector('#email').value;
+                socket.emit('check email', {'email': email});
+            };
+        });
+
+        socket.on('valid username', data => {
+            if(data===false){
+                document.querySelector('#usernameTaken').style.visibility = "visible";
+            } else {
+                document.querySelector('#usernameTaken').style.visibility = "hidden";
+            }
+        });
+
+        socket.on('valid email', data => {
+            if(data===false){
+                document.querySelector('#emailTaken').style.visibility = "visible";
+            } else {
+                document.querySelector('#emailTaken').style.visibility = "hidden";
+            }
+        });
+    });
+</script>
 {% endblock %}
