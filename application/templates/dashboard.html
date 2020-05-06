@@ -8,5 +8,8 @@ Dashboard
 {% for message in get_flashed_messages() %}
 {% endfor %}
 <h1>Dashboard</h1>
+{{ user.name }}
+{{ user.email }}
+{{ user.password }}
 
 {% endblock %}

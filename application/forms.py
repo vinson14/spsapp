@@ -14,3 +14,10 @@ class SignupForm(FlaskForm):
     confirm_pass = PasswordField('Please re-enter your password', validators=[DataRequired(),
                             EqualTo('password', message='Passwords must match.')])
     submit = SubmitField('Register')
+
+
+class LoginForm(FlaskForm):
+    """Signup Form"""
+    username = StringField('Username or Email', validators=[DataRequired()])
+    password =  PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Login')

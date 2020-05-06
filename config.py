@@ -8,6 +8,6 @@ class Config:
     FLASK_APP = 'wsgi.py'
 
     # Database
-    SQLALCHEMY_DATABASE_URI = "postgres://iybvaosvdzrjar:1c615d5b7e143c0d9e2ed628b4480e785323e3b5cb9b796fe0a9798c1c7fd02a@ec2-52-87-135-240.compute-1.amazonaws.com:5432/da48nr8lseo1v5"
+    SQLALCHEMY_DATABASE_URI = "postgres://unkhxuyztfpceq:fb7205832ce6845b0f5a48d210e6a7e3beb23780624e95386c3fdaa40e724ee4@ec2-18-232-143-90.compute-1.amazonaws.com:5432/d77170j54loomn"
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False

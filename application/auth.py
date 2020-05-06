@@ -2,7 +2,7 @@ from flask import Blueprint, redirect, render_template, flash, request
 from flask import session, url_for
 from flask_login import login_required, logout_user, current_user, login_user
 from datetime import datetime as dt
-from .forms import SignupForm
+from .forms import SignupForm, LoginForm
 from .models import db, User
 from . import login_manager, socketio, emit
 
@@ -25,6 +25,20 @@ def signup():
             return redirect(url_for('main_bp.dashboard'))
     return render_template("signup.html", form=form)
 
+
+@auth_bp.route('/login', methods=['GET', 'POST'])
+def login():
+    """Login page."""
+    form = LoginForm()
+    username = form.username.data
+    if form.validate_on_submit():
+        user = User.query.filter((User.username == username) | (User.email == username)).first()
+        if user and user.check_password(form.password.data):
+            login_user(user)
+            return redirect(url_for('main_bp.dashboard'))
+    return render_template("login.html", form=form)
+
+
 @socketio.on('check username')
 def check_username(data):
     """Check in realtime if the username is taken"""
@@ -33,6 +47,7 @@ def check_username(data):
     valid_username = check_username == None
     emit("valid username", valid_username, broadcast=True)
 
+
 @socketio.on('check email')
 def check_email(data):
     """Check in realtime if the email is taken"""
@@ -40,8 +55,6 @@ def check_email(data):
     check_email = User.query.filter_by(email=email).first()
     valid_email = check_email == None
     emit("valid email", valid_email, broadcast=True)
-
-
 
 
 @login_manager.user_loader

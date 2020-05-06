@@ -14,4 +14,4 @@ main_bp = Blueprint('main_bp', __name__, template_folder='templates', static_fol
 @login_required
 def dashboard():
     """Homepage for logged in users"""
-    return render_template('dashboard.html')
+    return render_template('dashboard.html', user=current_user)
