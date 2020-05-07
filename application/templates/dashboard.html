@@ -7,9 +7,32 @@ Dashboard
 {% block content %}
 {% for message in get_flashed_messages() %}
 {% endfor %}
-<h1>Dashboard</h1>
-{{ user.name }}
-{{ user.email }}
-{{ user.password }}
+<style>
+    #main-container {
+        background-image: url("/static/img/dashboard-bg.jpg");
+        background-size: cover;
+        background-position: center 0;
+        height: 100vh;
+        color: #f8f9fa
+    }
+
+    .indie {
+        font-family: 'Indie Flower', cursive;
+    }
+    strong, h1, h5 {
+        font-family: 'Share Tech Mono', monospace;
+    }
+</style>
+<div class="container-fluid p-2" id="main-container">
+    <!-- Sidenav  -->
+    <div class="row m-3">
+        <div class="col-12 text-center">
+            <h1 class="h1-responsive">Welcome <span class="h3-responsive">{{ user.name }}</span></h1>
+        </div>
+        <div class="col-12 text-center">
+            <h1><strong>Current Status: </strong><span class="indie">Alive</span></h1>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
