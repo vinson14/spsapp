@@ -18,7 +18,7 @@ def signup():
         check_email = User.query.filter_by(email=form.email.data).first()
         if check_username == None and check_email == None:
             user = User(username=form.username.data, name=form.name.data,
-                        email=form.email.data, created=dt.now())
+                        email=form.email.data, created=dt.now(), in_game=False)
             user.set_password(form.password.data)
             user.add_user()
             login_user(user) # Set user as logged in
@@ -37,6 +37,14 @@ def login():
             login_user(user)
             return redirect(url_for('main_bp.dashboard'))
     return render_template("login.html", form=form)
+
+
+@auth_bp.route('/logout')
+@login_required
+def logout():
+    """User log-out logic."""
+    logout_user()
+    return redirect(url_for('auth_bp.login'))
 
 
 @socketio.on('check username')

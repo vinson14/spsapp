@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Dashboard
+Battle
 {% endblock %}
 
 {% block content %}
@@ -10,7 +10,7 @@ Dashboard
 
 <head>
     <style>
-        #main-container {
+        body {
             background-image: url("/static/img/dashboard-bg.jpg");
             background-size: cover;
             background-position: center 0;
@@ -41,9 +41,12 @@ Dashboard
             top: 0;
             left: 0;
             overflow-x: hidden;
-            transition: 0.5s;
             padding-top: 60px;
             background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .side-nav * {
+            overflow-x: hidden;
         }
 
         .list-group-item {
@@ -56,7 +59,9 @@ Dashboard
             color: #f8f9fa;
         }
 
-        #createBattle, #leaveBattle, #joinBattle {
+        #createBattle,
+        #leaveBattle,
+        #joinBattle {
             color: #f8f9fa !important;
             background-color: transparent !important;
             border: 2px solid #f8f9fa !important;
@@ -98,11 +103,11 @@ Dashboard
         }
     </style>
     <!-- Sidebar navigation -->
-    <button class="btn p-3 button-collapse" id="sidenav-burger"><i class="fas fa-bars"></i></button>
+    <button class="btn p-3 button-collapse" id="sidenav-burger" type="button"><i class="fas fa-bars"></i></button>
     <div id="sideNav" class="side-nav">
         <ul class="list-group">
+            <a href="{{ url_for('main_bp.dashboard') }}" class="list-group-item list-group-item-action">Dashboard</a>
             <a href="{{ url_for('auth_bp.logout') }}" class="list-group-item list-group-item-action">Logout</a>
-            <a href="#!" class="list-group-item list-group-item-action">Morbi leo risus</a>
             <a href="#!" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
             <a href="#!" class="list-group-item list-group-item-action">Vestibulum at eros</a>
         </ul>
@@ -111,45 +116,34 @@ Dashboard
     <!--/. Sidebar navigation -->
 
 
-    <div class="container-fluid p-2" id="main-container">
-        <div class="row m-3">
+    <div class="container-fluid p-2 h-100" id="main-container">
+        <div class="row mt-3 mb-0 mx-0">
             <div class="col-12 text-center">
 
                 <h1 class="h1-responsive">Welcome <span class="h3-responsive">{{ current_user.name }}</span></h1>
             </div>
+        </div>
+        <div class="row m-0">
             <div class="col-12 text-center">
                 <h1><strong>Current Status: </strong><span class="indie">
                         {% if current_user.in_game %}IN BATTLE{% else %}SLACKING{% endif %}</span></h1>
             </div>
-            <div class="col-12 text-center">
-                {% if current_user.in_game %}
-                <a href="{{ url_for('main_bp.leave_battle') }}">
-                    <button type="button" class="btn btn-outline-primary waves-effect" id="leaveBattle">Leave Battle
-                    </button>
-                </a>
-                <a href="{{ url_for('main_bp.join_battle') }}">
-                    <button type="button" class="btn btn-outline-primary waves-effect" id="joinBattle">Resume Battle
-                    </button>
-                </a>
-                {% else %}
-                <a href="{{ url_for('main_bp.create_battle') }}">
-                    <button type="button" class="btn btn-outline-primary waves-effect" id="createBattle">Create Battle
-                    </button>
-                </a>
-                <a href="{{ url_for('main_bp.join_battle') }}">
-                    <button type="button" class="btn btn-outline-primary waves-effect" id="joinBattle">Join Battle
-                    </button>
-                </a>
-                {% endif %}
+        </div>
+        <div class="row mx-0 justify-content-center">
+            <div class="col-4">
+                <ul class="list-group text-center list-group-flush">
+                    <a href="{{ url_for('main_bp.dashboard') }}" class="list-group-item list-group-item-action">{{ current_user.username }} : {{ current_user.games_joined[0].user_status }}</a>
+
+                </ul>
             </div>
         </div>
     </div>
 
 
+
+
     {% endblock %}
 
     {% block javascript %}
-
     <script type="text/javascript" src="{{ url_for('static', filename='js/navbar.js') }}"></script>
-
     {% endblock %}

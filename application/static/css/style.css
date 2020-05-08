@@ -1,0 +1,90 @@
+body {
+    background-image: url("/static/img/dashboard-bg.jpg");
+    background-size: cover;
+    background-position: center 0;
+    height: 100vh;
+    color: #f8f9fa;
+}
+
+.font-indie {
+    font-family: 'Indie Flower', cursive;
+}
+
+.font-sharetech {
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.bg-pri {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.text-pri {
+    color: #f8f9fa;
+}
+
+#sidenav-burger {
+    position: fixed;
+    z-index: 1;
+}
+
+.side-nav {
+    height: 100%;
+    width: 0px;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 60px;
+}
+
+.w-max-content {
+    width: max-content;
+}
+
+.bg-transparent {
+    background-color: transparent;
+}
+
+#createBattle,
+#leaveBattle,
+#joinBattle {
+    color: #f8f9fa !important;
+    background-color: transparent !important;
+    border: 2px solid #f8f9fa !important;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.openNav {
+    animation-name: openNav;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+.closeNav {
+    animation-name: closeNav;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes openNav {
+    from {
+        width: 0px;
+    }
+
+    to {
+        width: 250px;
+    }
+}
+
+@keyframes closeNav {
+    from {
+        width: 250px;
+    }
+
+    to {
+        width: 0px;
+    }
+}

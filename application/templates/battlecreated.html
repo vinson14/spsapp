@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+{% for message in get_flashed_messages() %}
+{% endfor %}
+
+<h1>Battle Created</h1>
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

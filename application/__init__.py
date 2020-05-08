@@ -23,6 +23,6 @@ def create_app():
         app.register_blueprint(routes.main_bp)
         app.register_blueprint(auth.auth_bp)
 
-        db.create_all()
+        # db.create_all()
 
         return app

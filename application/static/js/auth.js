@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+
     var valid_username = false;
     var valid_email = false;
     var valid_password = false;
@@ -8,12 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#usernameTaken').style.visibility = "hidden";
     document.querySelector('#emailTaken').style.visibility = "hidden";
     document.querySelector('#passwordError').style.visibility = "hidden"
-    document.querySelector('#register').disabled = true;
+    document.querySelector('#register').disabled = false;
 
 
     // Connect to websocket
-    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port)
-    ;
+    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
     socket.on('connect', () => {
         document.querySelector('#username').onblur = () => {
             const username = document.querySelector('#username').value;
@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let password = document.querySelector('#password').value;
         let confPassword = document.querySelector('#confirmPassword').value;
         if(password !== confPassword) {
+            valid_password = false;
             document.querySelector('#passwordError').style.visibility = "visible"
         } else {
             document.querySelector('#passwordError').style.visibility = "hidden"
