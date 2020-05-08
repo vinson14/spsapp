@@ -6,6 +6,8 @@ body {
     color: #f8f9fa;
 }
 
+/* Utilities */
+
 .font-indie {
     font-family: 'Indie Flower', cursive;
 }
@@ -22,9 +24,15 @@ body {
     color: #f8f9fa;
 }
 
+.bg-transparent {
+    background-color: transparent;
+}
+
+/* Specific Components */
 #sidenav-burger {
     position: fixed;
     z-index: 1;
+    border
 }
 
 .side-nav {
@@ -36,25 +44,30 @@ body {
     left: 0;
     overflow-x: hidden;
     padding-top: 60px;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
-.w-max-content {
-    width: max-content;
-}
-
-.bg-transparent {
+.list-group-item {
+    min-width: max-content;
     background-color: transparent;
+    color: #f8f9fa;
 }
 
-#createBattle,
-#leaveBattle,
-#joinBattle {
+.btn {
     color: #f8f9fa !important;
     background-color: transparent !important;
     border: 2px solid #f8f9fa !important;
     font-family: 'Share Tech Mono', monospace;
 }
 
+.btn:hover {
+    color: #f8f9fa !important;
+    background-color: rgba(0, 0, 0, 0.7)!important;
+    border: 2px solid #f8f9fa !important;
+}
+
+
+/* Animations */
 .openNav {
     animation-name: openNav;
     animation-duration: 1s;

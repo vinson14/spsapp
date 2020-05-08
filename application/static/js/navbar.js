@@ -9,9 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     document.querySelector('#main-container').onclick = () => {
-        document.querySelector('#sideNav').classList.remove("openNav");
-        document.querySelector('#sideNav').classList.add("closeNav");
-        document.querySelector('#sidenav-burger').style.visibility = "visible";
+        if(document.querySelector('#sideNav').classList.contains("openNav")) {
+            document.querySelector('#sideNav').classList.remove("openNav");
+            document.querySelector('#sideNav').classList.add("closeNav");
+            document.querySelector('#sidenav-burger').style.visibility = "visible";
+        };
     };
 
 });
