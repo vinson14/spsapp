@@ -40,7 +40,7 @@ Dashboard
                     <button type="button" class="btn btn-outline-primary waves-effect" id="leaveBattle">Leave Battle
                     </button>
                 </a>
-                <a href="{{ url_for('main_bp.join_battle') }}">
+                <a href="{{ url_for('main_bp.battle') }}">
                     <button type="button" class="btn btn-outline-primary waves-effect" id="joinBattle">Resume Battle
                     </button>
                 </a>
@@ -49,10 +49,16 @@ Dashboard
                     <button type="button" class="btn btn-outline-primary waves-effect" id="createBattle">Create Battle
                     </button>
                 </a>
-                <a href="{{ url_for('main_bp.join_battle') }}">
-                    <button type="button" class="btn btn-outline-primary waves-effect" id="joinBattle">Join Battle
-                    </button>
-                </a>
+                <form action="{{ url_for('main_bp.battle') }}" method="POST">
+                    <div class="row align-items-center">
+                        <input name="battle_id" class="form-control col-4 font-sharetech" type="text" placeholder="Input Battle ID" aria-label="Input Battle ID">
+                        <button type="submit col-4" class="btn btn-outline-primary waves-effect" id="joinBattle">Join Battle
+                        </button>
+                    </div>
+
+                </form>
+
+                <!-- Search form -->
                 {% endif %}
             </div>
         </div>
@@ -64,5 +70,6 @@ Dashboard
     {% block javascript %}
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 
     {% endblock %}

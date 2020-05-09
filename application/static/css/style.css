@@ -17,15 +17,23 @@ body {
 }
 
 .bg-pri {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.7) !important;
 }
 
 .text-pri {
-    color: #f8f9fa;
+    color: #f8f9fa !important;
 }
 
 .bg-transparent {
     background-color: transparent;
+}
+
+.min-w-min-cont {
+    min-width: min-content !important;
+}
+
+.min-w-max-cont {
+    min-width: max-content;
 }
 
 /* Specific Components */
@@ -33,6 +41,43 @@ body {
     position: fixed;
     z-index: 1;
     border
+}
+
+#scissors, #stone {
+    min-height: 300px;
+    font-family: 'Share Tech Mono', monospace;
+    background-size: cover;
+    background-position: center;
+}
+
+#stone {
+    /*    background-image: url('https://images.pexels.com/photos/668353/pexels-photo-668353.jpeg?cs=srgb&dl=four-rock-formation-668353.jpg&fm=jpg'); */
+    background-image: url("/static/img/stone.jpg");
+}
+
+#scissors {
+    /*    background-image: url('https://images.pexels.com/photos/668353/pexels-photo-668353.jpeg?cs=srgb&dl=four-rock-formation-668353.jpg&fm=jpg'); */
+    background-image: url("/static/img/scissors.jpg");
+}
+
+#paper {
+    /*    background-image: url('https://images.pexels.com/photos/668353/pexels-photo-668353.jpeg?cs=srgb&dl=four-rock-formation-668353.jpg&fm=jpg'); */
+    background-image: url("/static/img/paper.jpg");
+    background-size: cover;
+    background-position: center;
+    min-height: 500px;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #f8f9fa !important;
+    opacity: 0.7 !important;
+    text-align: center;
+}
+
+.form-control {
+    caret-color: #f8f9fa;
 }
 
 .side-nav {
@@ -60,7 +105,8 @@ body {
     font-family: 'Share Tech Mono', monospace;
 }
 
-.btn:hover {
+.btn:hover, .btn:focus, .btn:active {
+    border: 2px solid #f8f9fa !important;
     color: #f8f9fa !important;
     background-color: rgba(0, 0, 0, 0.7)!important;
     border: 2px solid #f8f9fa !important;

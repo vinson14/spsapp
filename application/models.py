@@ -36,9 +36,17 @@ class User(UserMixin, db.Model):
         self.in_game = True
         db.session.add(new_battle)
         db.session.commit()
+
+        # obtain the newly created Battle.ID to add user to Players
         new_battle = Battle.query.filter(Battle.owner_id==self.id).order_by(Battle.time_created.desc()).first()
         new_player = Player(battle_id=new_battle.id, user_id=self.id, user_status="Alive", time_created=dt.now())
         db.session.add(new_player)
+        db.session.commit()
+
+    def join_battle(self, battle_id):
+        self.in_game = True
+        player = Player(battle_id=battle_id, user_id=self.id, user_status='Alive', time_created=dt.now())
+        db.session.add(player)
         db.session.commit()
 
     def change_status(self):
@@ -58,6 +66,7 @@ class Battle(db.Model):
     winner_id = db.Column(db.Integer, index=False, unique=False, nullable=True)
     time_created = db.Column(db.DateTime, index=False, unique=False, nullable=False)
     time_ended = db.Column(db.DateTime, index=False, unique=False, nullable=True)
+    players = db.relationship('Player', backref='battle_info', lazy=True)
 
     def __repr__(self):
         return '<Battle_id {}>'.format(self.id)
@@ -86,3 +95,19 @@ class Move(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user_accounts.id'), nullable=False)
     round_number = db.Column(db.Integer, nullable=False, unique=False)
     time_made = db.Column(db.DateTime, nullable=False, unique=False)
+
+    def __repr__(self):
+        return '<Move_id {}>'.format(self.id)
+
+
+class History(db.Model):
+    """Data Model to store history of players"""
+    __tablename__ = "history"
+    id = db.Column(db.Integer, primary_key=True)
+    battle_id = db.Column(db.Integer, db.ForeignKey('battles.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user_accounts.id'), nullable=False)
+    user_status = db.Column(db.String(10), index=False, unique=False, nullable=False)
+    time_created = db.Column(db.DateTime, index=False, unique=False, nullable=False)
+
+    def __repr__(self):
+        return '<Move_id {}>'.format(self.id)
