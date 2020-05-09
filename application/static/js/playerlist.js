@@ -4,20 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // When a new vote is announced, add to the unordered list
     socket.on('add player', data => {
         const li = document.createElement('li');
-        li.innerHTML = `<a href="{{ url_for('main_bp.dashboard') }}" class="list-group-item list-group-item-action h5-responsive font-sharetech min-w-min-cont" id="${ data.username }">
-                        ${ data.username }: Alive
+        li.innerHTML = `<a href="{{ url_for('main_bp.dashboard') }}" class="list-group-item list-group-item-action h5-responsive font-sharetech min-w-min-cont" id="${ data }">
+                        ${ data }: Alive
                        </a>`;
+        li.id = data;
         document.querySelector('#playerList').append(li);
     });
 
     socket.on('remove player', data => {
-        const li = document.createElement('li');
-        li.innerHTML = `<a href="{{ url_for('main_bp.dashboard') }}" class="list-group-item list-group-item-action h5-responsive font-sharetech min-w-min-cont" id="${ data.username }">
-                        ${ data.username }: Alive
-                        </a>`;
-        document.querySelector('#playerList').append(li);
+        document.querySelector(`#${ data }`).remove();
     });
-
-
-
 });

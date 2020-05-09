@@ -49,6 +49,14 @@ class User(UserMixin, db.Model):
         db.session.add(player)
         db.session.commit()
 
+    def leave_battle(self, current_battle):
+        self.in_game = not self.in_game
+        history = History(battle_id=current_battle.battle_id, user_id=current_battle.user_id,
+                            user_status=current_battle.user_status, time_created=current_battle.time_created)
+        db.session.add(history)
+        db.session.delete(current_battle)
+        db.session.commit()
+
     def change_status(self):
         self.in_game = not self.in_game
         db.session.commit()

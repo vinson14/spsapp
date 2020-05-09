@@ -36,10 +36,6 @@ Dashboard
             </div>
             <div class="col-12 text-center">
                 {% if current_user.in_game %}
-                <a href="{{ url_for('main_bp.leave_battle') }}">
-                    <button type="button" class="btn btn-outline-primary waves-effect" id="leaveBattle">Leave Battle
-                    </button>
-                </a>
                 <a href="{{ url_for('main_bp.battle') }}">
                     <button type="button" class="btn btn-outline-primary waves-effect" id="joinBattle">Resume Battle
                     </button>
