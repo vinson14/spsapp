@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Battle
+{% endblock %}
+
+{% block content %}
+{% for message in get_flashed_messages() %}
+{% endfor %}
+
+<head>
+    <!-- Sidebar navigation -->
+    <button class="btn p-3 button-collapse" id="sidenav-burger" type="button"><i class="fas fa-bars"></i></button>
+    <div id="sideNav" class="side-nav">
+        <ul class="list-group text-pri bg-transparent">
+            <a href="{{ url_for('main_bp.dashboard') }}" class="list-group-item list-group-item-action">Dashboard</a>
+            <a href="{{ url_for('auth_bp.logout') }}" class="list-group-item list-group-item-action">Logout</a>
+            <a href="#!" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+            <a href="#!" class="list-group-item list-group-item-action">Vestibulum at eros</a>
+        </ul>
+        <div class="sidenav-bg mask-strong"></div>
+    </div>
+    <!--/. Sidebar navigation -->
+
+
+    <div class="container-fluid p-2 h-100" id="main-container">
+        <div class="row mt-3 mb-0 mx-0">
+            <div class="col-12 text-center">
+                <h1 class="h1-responsive font-sharetech">Welcome <span class="h3-responsive">{{ current_user.name }}</span></h1>
+            </div>
+        </div>
+
+        <div class="row mx-0 mt-5 justify-content-center">
+            <div class="col-8">
+                <ul class="list-group text-center list-group-flush font-sharetech" id="playerList">
+                    <h3 class="h3-responsive list-group-item bg-pri min-w-min-cont">Players in the Battle</h3>
+                    {% for player in players %}
+                    <a href="{{ url_for('main_bp.dashboard') }}" id="{{ player.user.username }}" class="list-group-item list-group-item-action h5-responsive font-sharetech min-w-min-cont">
+                        {{ player.user.username }} : {{ player.user_status }}
+                    </a>
+                    {% endfor %}
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    {% endblock %}
+
+    {% block javascript %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+    {% endblock %}

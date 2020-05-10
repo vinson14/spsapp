@@ -43,9 +43,9 @@ Battle
                 </h1>
             </div>
             <div class="col-12">
-                <form action="{{ url_for('main_bp.battle') }}" method="POST">
+                <form action="{{ url_for('main_bp.leave_battle') }}" method="POST">
                     <div class="row align-items-center">
-                        <button type="submit col-4" class="btn btn-outline-primary waves-effect" id="joinBattle" value="True" name="leaveBattle">Leave Battle
+                        <button type="submit col-4" class="btn btn-outline-primary waves-effect" id="leaveBattle" value="True" name="leaveBattle">Leave Battle
                         </button>
                     </div>
                 </form>
@@ -56,7 +56,7 @@ Battle
                 <ul class="list-group text-center list-group-flush font-sharetech" id="playerList">
                     <h3 class="h3-responsive list-group-item bg-pri min-w-min-cont">Players in the Battle</h3>
                     {% for player in current_players %}
-                    <a href="{{ url_for('main_bp.dashboard') }}" class="list-group-item list-group-item-action h5-responsive font-sharetech min-w-min-cont">
+                    <a href="{{ url_for('main_bp.dashboard') }}" id="{{ player.user.username }}" class="list-group-item list-group-item-action h5-responsive font-sharetech min-w-min-cont">
                         {{ player.user.username }} : {{ player.user_status }}
                     </a>
                     {% endfor %}

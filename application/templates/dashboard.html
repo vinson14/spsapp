@@ -45,7 +45,7 @@ Dashboard
                     <button type="button" class="btn btn-outline-primary waves-effect" id="createBattle">Create Battle
                     </button>
                 </a>
-                <form action="{{ url_for('main_bp.battle') }}" method="POST">
+                <form action="{{ url_for('main_bp.join_battle') }}" method="POST">
                     <div class="row align-items-center">
                         <input name="battle_id" class="form-control col-4 font-sharetech" type="text" placeholder="Input Battle ID" aria-label="Input Battle ID">
                         <button type="submit col-4" class="btn btn-outline-primary waves-effect" id="joinBattle">Join Battle
