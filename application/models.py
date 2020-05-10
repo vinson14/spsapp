@@ -49,8 +49,9 @@ class User(UserMixin, db.Model):
         db.session.add(player)
         db.session.commit()
 
-    def leave_battle(self, current_battle):
+    def leave_battle(self):
         self.in_game = not self.in_game
+        current_battle = self.games_joined[0]
         history = History(battle_id=current_battle.battle_id, user_id=current_battle.user_id,
                             user_status=current_battle.user_status, time_created=current_battle.time_created)
         db.session.add(history)
@@ -60,6 +61,9 @@ class User(UserMixin, db.Model):
     def change_status(self):
         self.in_game = not self.in_game
         db.session.commit()
+
+    def battle_id(self):
+        return self.games_joined[0].battle_id
 
     def __repr__(self):
         return '<Username {}>'.format(self.username)

@@ -4,7 +4,8 @@ from flask_login import login_required, logout_user, current_user, login_user
 from datetime import datetime as dt
 from .forms import SignupForm, LoginForm
 from .models import db, User
-from . import login_manager, socketio, emit
+from . import login_manager, socketio
+from flask_socketio import emit
 
 auth_bp = Blueprint('auth_bp', __name__, template_folder='templates', static_folder='static')
 

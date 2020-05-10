@@ -14,4 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('remove player', data => {
         document.querySelector(`#${ data }`).remove();
     });
+
+    socket.on('connect', () => {
+        console.log('sent join room request')
+        socket.emit('join room');
+    })
+
 });
